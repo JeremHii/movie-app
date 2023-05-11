@@ -39,7 +39,7 @@ const loadDirector = async () => {
   if (!route.params.id) return;
   director.value = await Api.Director.getOne(route.params.id);
   if (director.value === null) {
-    await router.push({ name: "movies" });
+    await router.push({ name: "directors" });
     return;
   }
 };
