@@ -1,7 +1,7 @@
 <template>
   <RouterLink :to="{ name: 'movieDetails', params: { id: props.movie.id } }">
     <SearchCard>
-      {{ props.movie.title }}
+      {{ props.movie.getTitle() }}
     </SearchCard>
   </RouterLink>
 </template>

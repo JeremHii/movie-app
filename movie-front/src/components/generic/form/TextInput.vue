@@ -42,7 +42,7 @@ import BaseInput from "@/components/generic/form/BaseInput.vue";
 
 const props = withDefaults(
   defineProps<{
-    modelValue: string | Date;
+    modelValue?: string | Date;
     placeHolder?: string;
     icon?: any;
     label?: string;

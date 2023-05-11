@@ -61,7 +61,7 @@
         >
           <li v-for="menu in menus" :key="menu.pathName">
             <RouterLink
-              class="block py-2 pl-3 pr-4 text-white hover:bg-blue-700 hover:text-white md:hover:bg-transparent text-black dark:text-white rounded md:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:text-zinc-500 dark:md:hover:text-white"
+              class="block py-2 pl-3 pr-4 text-black hover:bg-blue-700 hover:text-white md:hover:bg-transparent text-black dark:text-white rounded md:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:text-zinc-500 dark:md:hover:text-white"
               :to="{ name: menu.pathName }"
             >
               {{ menu.name }}
@@ -105,7 +105,6 @@ watch(search, async () => {
     return;
   }
   itemsFound.value = await Api.Search.search(search.value);
-  console.log(itemsFound.value);
 });
 
 const menus = [

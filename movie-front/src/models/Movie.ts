@@ -14,7 +14,7 @@ export class Movie {
 
   constructor(data: Partial<Movie>) {
     this.id = data.id;
-    this.title = data.title || "Unknown";
+    this.title = data.title || "";
     this.releaseDate = data.releaseDate
       ? new Date(data.releaseDate)
       : new Date();
@@ -43,6 +43,12 @@ export class Movie {
 
   getSynopsis() {
     return this.synopsis || "Aucun synopsis disponible...";
+  }
+
+  getTitle() {
+    return this.title && this.title.trim() !== ""
+        ? this.title
+        : "Aucun titre";
   }
 
   getLanguageName() {

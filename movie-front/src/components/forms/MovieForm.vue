@@ -86,7 +86,7 @@
         :items="directors"
         required
         :selected="
-          directors.find((director) => director.id === props.movie.director.id)
+          props.movie.director ? directors.find((director) => director.id === props.movie.director.id) : undefined
         "
         @update:selected="(e) => updateAttribute('director', e)"
       >
@@ -129,11 +129,12 @@
         :disabled="!hasChanged || !props.isValid"
       />
       <Button
-        text="Annuler les changements"
-        class="w-full"
-        @click="emits('cancel')"
-        theme="error"
-        :disabled="!hasChanged"
+          v-if="movie.id"
+          text="Annuler les changements"
+          class="w-full"
+          @click="emits('cancel')"
+          theme="error"
+          :disabled="!hasChanged"
       />
     </div>
   </div>

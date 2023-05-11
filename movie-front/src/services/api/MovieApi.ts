@@ -23,4 +23,23 @@ export class MovieApi {
     if (response.status !== 200) return false;
     return new Movie(response.data);
   }
+
+  static async create(movie: Movie) {
+    const response = await Api.instance.post(
+        `/movies`,
+        movie.getPayload()
+    );
+
+    if (response.status !== 201) return false;
+    return new Movie(response.data);
+  }
+
+  static async delete(id: number) {
+    const response = await Api.instance.delete(
+        `/movies/${id}`
+    );
+
+    return response.status === 204;
+
+  }
 }

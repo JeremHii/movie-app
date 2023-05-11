@@ -22,7 +22,7 @@
         <div
           class="font-bold text-white group-hover:w-full truncate group-hover:whitespace-normal"
         >
-          {{ props.movie.title }}
+          {{ props.movie.getTitle() }}
         </div>
         <div class="group-hover:visible mt-2">
           <div class="flex items-center">

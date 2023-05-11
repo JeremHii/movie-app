@@ -8,7 +8,7 @@
       ></div>
       <div class="relative flex-1 select-none">
         <img
-          :src="props.movie.background"
+          :src="props.movie.background || ''"
           crossorigin=""
           ref="img"
           class="object-cover w-full h-full"
@@ -29,7 +29,7 @@
       <div class="ml-10 my-auto overflow-x-hidden z-50 p-2">
         <div>
           <span class="font-bold text-3xl md:text-4xl">
-            {{ props.movie.title }}
+            {{ props.movie.getTitle() }}
           </span>
           <span class="text-3xl text-gray-200">
             ({{ props.movie.releaseDate.getFullYear() }})
@@ -60,7 +60,7 @@
               ></div>
             </IconButton>
           </RouterLink>
-          <IconButton :icon="TrashIcon" theme="error" class="ml-2" />
+          <IconButton :icon="TrashIcon" theme="error" class="ml-2" @click="emits('delete')" />
         </div>
       </div>
     </div>
@@ -78,6 +78,7 @@ import { DateUtils } from "../../../utils/DateUtils";
 const dominantColor = ref<string>("transparent");
 
 const props = defineProps<{ movie: Movie }>();
+const emits = defineEmits<{ (e: "delete"): void }>()
 const img = ref();
 
 watch(props, async () => {

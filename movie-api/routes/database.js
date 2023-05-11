@@ -25,6 +25,8 @@ router.get('/populate', async (req, res) => {
 
     let genres = await TmdbAPI.getGenres()
 
+    console.log(`Fetched ${genres.length} genres`)
+
     for(let genre of genres){
         genre.internalId = (await GenreRepository.create({name: genre.name})).id
     }
@@ -35,8 +37,11 @@ router.get('/populate', async (req, res) => {
         movies.push(...(await TmdbAPI.getPopularMovies(i)))
     }
 
+    console.log(`Fetched ${movies.length} movies`)
+
     let directors = []
 
+    let i = 0;
     for(let movie of movies){
         let director = await TmdbAPI.getMovieDirector(movie.id)
         if(director){
@@ -46,7 +51,10 @@ router.get('/populate', async (req, res) => {
         if(director && !directors.find((directorToFind) => directorToFind.id === director.id)){
             directors.push(director)
         }
+        i++
     }
+
+    console.log(`Fetched ${directors.length} directors`)
 
     for(let director of directors){
         director.internalId = (await DirectorRepository.create({

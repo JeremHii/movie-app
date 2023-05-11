@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import MoviesView from "../views/movie/MoviesView.vue";
 import MovieView from "../views/movie/MovieView.vue";
 import MovieEditView from "@/views/movie/MovieEditView.vue";
+import MovieCreateView from "@/views/movie/MovieCreateView.vue";
 import DirectorsView from "@/views/director/DirectorsView.vue";
 import DirectorView from "@/views/director/DirectorView.vue";
 
@@ -18,19 +19,29 @@ const router = createRouter({
           component: MoviesView,
         },
         {
-          path: "movie/:id",
+          path: "movie",
           children: [
             {
-              path: "",
-              name: "movieDetails",
-              component: MovieView,
+              path: "new",
+              name: "movieNew",
+              component: MovieCreateView
             },
             {
-              path: "edit",
-              name: "movieEdit",
-              component: MovieEditView,
-            },
-          ],
+              path: ":id",
+              children: [
+                {
+                  path: "",
+                  name: "movieDetails",
+                  component: MovieView,
+                },
+                {
+                  path: "edit",
+                  name: "movieEdit",
+                  component: MovieEditView,
+                },
+              ],
+            }
+          ]
         },
         {
           path: "director",

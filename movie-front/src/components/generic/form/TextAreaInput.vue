@@ -23,7 +23,7 @@ import { ref } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    modelValue: string;
+    modelValue?: string;
     placeHolder?: string;
     label?: string;
     rows?: number;

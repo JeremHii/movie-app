@@ -15,7 +15,7 @@
     >
       <div class="w-full">
         <div>
-          <div class="bg-zinc-700 px-2 py-1 rounded-t-lg font-bold">Films</div>
+          <div class="bg-gray-200 dark:bg-zinc-700 px-2 py-1 rounded-t-lg font-bold">Films</div>
           <div v-if="props.items.movies.length > 0">
             <MovieSearchCard
               v-for="movie in props.items.movies.slice(0, 10)"
@@ -27,7 +27,7 @@
         </div>
 
         <div>
-          <div class="bg-zinc-700 px-2 py-1 font-bold">Réalisateurs</div>
+          <div class="bg-gray-200 dark:bg-zinc-700 px-2 py-1 font-bold">Réalisateurs</div>
           <div v-if="props.items.directors.length > 0">
             <DirectorSearchCard
               v-for="director in props.items.directors.slice(0, 10)"
@@ -39,7 +39,7 @@
         </div>
 
         <div>
-          <div class="bg-zinc-700 px-2 py-1 font-bold">Genres</div>
+          <div class="bg-gray-200 dark:bg-zinc-700 px-2 py-1 font-bold">Genres</div>
           <div v-if="props.items.genres.length > 0">
             <GenreSearchCard
               v-for="genre in props.items.genres.slice(0, 10)"

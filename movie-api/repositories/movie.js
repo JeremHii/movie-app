@@ -15,6 +15,12 @@ class MovieRepository extends BaseRepository {
 
         return await this.getOne(id)
     }
+
+    static async create(data){
+        const item = await this.model.create(data)
+        if(data.genreIds) await item.setGenres(data.genreIds)
+        return await this.getOne(item.id)
+    }
 }
 
 module.exports = {MovieRepository}
