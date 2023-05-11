@@ -73,7 +73,7 @@ import { Movie } from "@/models/Movie";
 import { ImageUtils } from "@/utils/ImageUtils";
 import IconButton from "@/components/generic/IconButton.vue";
 import { PencilIcon, TrashIcon } from "@heroicons/vue/24/solid";
-import { DateUtils } from "../../../utils/DateUtils";
+import { DateUtils } from "@/utils/DateUtils";
 
 const dominantColor = ref<string>("transparent");
 

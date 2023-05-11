@@ -10,12 +10,12 @@ export class Director {
   biography?: string;
   movies?: Movie[];
 
-  constructor(data: Director) {
+  constructor(data: Partial<Director>) {
     this.id = data.id;
-    this.firstName = data.firstName;
-    this.lastName = data.lastName;
-    this.nationality = data.nationality;
-    this.birthDate = data.birthDate;
+    this.firstName = data.firstName || "";
+    this.lastName = data.lastName || "";
+    this.nationality = data.nationality || "";
+    this.birthDate = data.birthDate ? new Date(data.birthDate) : new Date();
     this.picture = data.picture;
     this.biography = data.biography;
     this.movies = data.movies
@@ -23,6 +23,17 @@ export class Director {
           (movieData) => new Movie({ ...movieData, director: this })
         )
       : [];
+  }
+
+  getPayload() {
+    return {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      nationality: this.nationality,
+      birthDate: this.birthDate,
+      picture: this.picture,
+      biography: this.biography,
+    };
   }
 
   getFullName() {

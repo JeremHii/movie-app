@@ -5,6 +5,9 @@ import MovieEditView from "@/views/movie/MovieEditView.vue";
 import MovieCreateView from "@/views/movie/MovieCreateView.vue";
 import DirectorsView from "@/views/director/DirectorsView.vue";
 import DirectorView from "@/views/director/DirectorView.vue";
+import DirectorEditView from "@/views/director/DirectorEditView.vue";
+import DirectorCreateView from "@/views/director/DirectorCreateView.vue";
+
 
 const router = createRouter({
   //@ts-ignore
@@ -52,6 +55,11 @@ const router = createRouter({
               component: DirectorsView,
             },
             {
+              path: "new",
+              name: "directorNew",
+              component: DirectorCreateView,
+            },
+            {
               path: ":id",
               children: [
                 {
@@ -62,7 +70,7 @@ const router = createRouter({
                 {
                   path: "edit",
                   name: "directorEdit",
-                  component: MovieEditView,
+                  component: DirectorEditView,
                 },
               ],
             },

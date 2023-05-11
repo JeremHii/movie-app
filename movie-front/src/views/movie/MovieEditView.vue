@@ -23,7 +23,7 @@ onBeforeMount(async () => {
   movie.value = await Api.Movie.getOne(route.params.id);
   savedMovie.value = _.clone(movie.value, { deep: true });
   if (movie.value === null) {
-    router.push({ name: "movies" });
+    await router.push({ name: "home" });
     return;
   }
 });

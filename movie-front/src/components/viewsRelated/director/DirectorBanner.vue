@@ -19,6 +19,15 @@
             {{ props.director.getFullName() }}
           </span>
         </div>
+        <div class="font-thin">
+          Né(e) le {{ DateUtils.formatDate(props.director.birthDate) }}
+        </div>
+        <div class="mt-2">
+          <div class="text-xl font-semibold">Nationalité</div>
+          <div class="max-h-full lg:max-h-full overflow-hidden w-full">
+            {{ props.director.nationality }}
+          </div>
+        </div>
         <div class="mt-2">
           <div class="text-xl font-semibold">Biographie</div>
           <div class="max-h-full lg:max-h-full overflow-hidden w-full">
@@ -40,7 +49,7 @@
               ></div>
             </IconButton>
           </RouterLink>
-          <IconButton :icon="TrashIcon" theme="error" class="ml-2" />
+          <IconButton :icon="TrashIcon" theme="error" class="ml-2" @click="emits('delete')" />
         </div>
       </div>
     </div>
@@ -53,8 +62,10 @@ import { PencilIcon, TrashIcon } from "@heroicons/vue/24/solid";
 import { computed, ref, watch } from "vue";
 import { ImageUtils } from "@/utils/ImageUtils";
 import IconButton from "@/components/generic/IconButton.vue";
+import {DateUtils} from "@/utils/DateUtils";
 
 const props = defineProps<{ director: Director }>();
+const emits = defineEmits<{ (e: "delete"): void }>()
 const dominantColor = ref<string>("transparent");
 const img = ref();
 
