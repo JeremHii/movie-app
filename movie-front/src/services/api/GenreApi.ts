@@ -1,17 +1,7 @@
-import { Api } from "@/services/api/Api";
-import { Director } from "@/models/Director";
 import { Genre } from "@/models/Genre";
+import { EntityApi } from "@/services/api/EntityApi";
 
-export class GenreApi {
-  static async getAll() {
-    const response = await Api.instance.get("/genres");
-    if (!response) return [];
-    return response.data.map((genreData: any) => new Genre(genreData));
-  }
-
-  static async getOne(id: number) {
-    const response = await Api.instance.get(`/genres/${id}`);
-
-    return response.data ? new Genre(response.data) : null;
-  }
+export class GenreApi extends EntityApi {
+  static model = Genre;
+  static path = "/genres"
 }

@@ -1,7 +1,7 @@
 const {Director} = require("../models");
 
 class BaseRepository {
-    static model = Director;
+    static model = null;
     static includes = {both: [], getAll: [], getOne: []};
 
     static async getAll(options){

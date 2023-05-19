@@ -9,7 +9,7 @@
     ]"
     :disabled="props.disabled"
   >
-    <component :is="props.icon" class="w-5 h-5 z-10" />
+    <component :is="props.icon" class="w-5 h-5" />
     <slot />
   </button>
 </template>

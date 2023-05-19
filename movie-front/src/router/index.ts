@@ -7,6 +7,8 @@ import DirectorsView from "@/views/director/DirectorsView.vue";
 import DirectorView from "@/views/director/DirectorView.vue";
 import DirectorEditView from "@/views/director/DirectorEditView.vue";
 import DirectorCreateView from "@/views/director/DirectorCreateView.vue";
+import GenresView from "@/views/genre/GenresView.vue";
+import GenreView from "@/views/genre/GenreView.vue";
 
 
 const router = createRouter({
@@ -82,7 +84,7 @@ const router = createRouter({
             {
               path: "",
               name: "genres",
-              component: MoviesView,
+              component: GenresView,
             },
             {
               path: ":id",
@@ -90,7 +92,7 @@ const router = createRouter({
                 {
                   path: "",
                   name: "genreDetails",
-                  component: MovieView,
+                  component: GenreView,
                 },
                 {
                   path: "edit",

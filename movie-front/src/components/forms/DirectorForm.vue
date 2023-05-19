@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <BaseForm :has-changed="props.hasChanged" :is-valid="props.isValid" :entity="props.director" @update:entity="e => emits('update:director', e)" @save="emits('save')" @cancel="emits('cancel')">
     <TextInput
-      label="Prénom"
-      :model-value="props.director.firstName"
-      required
-      @update:model-value="(e) => updateAttribute('firstName', e)"
+        label="Prénom"
+        :model-value="props.director.firstName"
+        required
+        @update:model-value="(e) => updateAttribute('firstName', e)"
     />
     <TextInput
         class="mt-2"
@@ -14,11 +14,11 @@
         @update:model-value="(e) => updateAttribute('lastName', e)"
     />
     <TextInput
-      class="mt-2"
-      label="Nationalité"
-      :model-value="props.director.nationality"
-      required
-      @update:model-value="(e) => updateAttribute('nationality', e)"
+        class="mt-2"
+        label="Nationalité"
+        :model-value="props.director.nationality"
+        required
+        @update:model-value="(e) => updateAttribute('nationality', e)"
     />
     <TextInput
         class="mt-2"
@@ -36,29 +36,15 @@
         @update:model-value="(e) => updateAttribute('biography', e)"
     />
     <TextInput
-      class="mt-2"
-      label="Image de profil"
-      :model-value="props.director.picture"
-      @update:model-value="(e) => updateAttribute('picture', e)"
+        class="mt-2"
+        label="Image de profil"
+        :model-value="props.director.picture"
+        @update:model-value="(e) => updateAttribute('picture', e)"
     />
-
-    <div class="flex mt-6 space-x-6">
-      <Button
-        text="Sauvegarder"
-        class="w-full"
-        @click="emits('save')"
-        :disabled="!hasChanged || !props.isValid"
-      />
-      <Button
-          v-if="director.id"
-          text="Annuler les changements"
-          class="w-full"
-          @click="emits('cancel')"
-          theme="error"
-          :disabled="!hasChanged"
-      />
-    </div>
-  </div>
+    <template #buttons="{canCancel, canSave}">
+      <slot name="buttons" :canCancel="canCancel" :canSave="canSave"></slot>
+    </template>
+  </BaseForm>
 </template>
 
 <script setup lang="ts">
@@ -68,6 +54,7 @@ import TextAreaInput from "@/components/generic/form/TextAreaInput.vue";
 import Button from "@/components/generic/button.vue";
 import { Director } from "@/models/Director";
 import _ from "lodash";
+import BaseForm from "@/components/forms/BaseForm.vue";
 
 const props = defineProps<{
   director: Director;

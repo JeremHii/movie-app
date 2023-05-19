@@ -1,58 +1,58 @@
 <template>
-  <div>
+  <BaseForm :has-changed="props.hasChanged" :is-valid="props.isValid" :entity="props.movie" @update:entity="e => emits('update:movie', e)" @save="emits('save')" @cancel="emits('cancel')">
     <TextInput
-      label="Titre"
-      :model-value="props.movie.title"
-      required
-      @update:model-value="(e) => updateAttribute('title', e)"
+        label="Titre"
+        :model-value="props.movie.title"
+        required
+        @update:model-value="(e) => updateAttribute('title', e)"
     />
     <TextAreaInput
-      class="mt-2"
-      label="Synopsis"
-      :rows="5"
-      :model-value="props.movie.synopsis"
-      @update:model-value="(e) => updateAttribute('synopsis', e)"
+        class="mt-2"
+        label="Synopsis"
+        :rows="5"
+        :model-value="props.movie.synopsis"
+        @update:model-value="(e) => updateAttribute('synopsis', e)"
     />
     <TextInput
-      class="mt-2"
-      label="Poster"
-      :model-value="props.movie.poster"
-      @update:model-value="(e) => updateAttribute('poster', e)"
+        class="mt-2"
+        label="Poster"
+        :model-value="props.movie.poster"
+        @update:model-value="(e) => updateAttribute('poster', e)"
     />
     <TextInput
-      class="mt-2"
-      label="Image de fond"
-      :model-value="props.movie.background"
-      @update:model-value="(e) => updateAttribute('background', e)"
+        class="mt-2"
+        label="Image de fond"
+        :model-value="props.movie.background"
+        @update:model-value="(e) => updateAttribute('background', e)"
     />
     <div class="flex w-full mt-2 space-x-4">
       <TextInput
-        class="flex-1"
-        label="Langue"
-        required
-        :model-value="props.movie.lang"
-        @update:model-value="(e) => updateAttribute('lang', e)"
+          class="flex-1"
+          label="Langue"
+          required
+          :model-value="props.movie.lang"
+          @update:model-value="(e) => updateAttribute('lang', e)"
       />
       <TextInput
-        class="mt-auto"
-        :disabled="true"
-        :model-value="props.movie.getLanguageName()"
+          class="mt-auto"
+          :disabled="true"
+          :model-value="props.movie.getLanguageName()"
       />
     </div>
 
     <div class="flex space-x-4 mt-2">
       <ComboBox
-        label="Genres"
-        displayed-attribute="name"
-        class="flex-1"
-        :filter="
+          label="Genres"
+          displayed-attribute="name"
+          class="flex-1"
+          :filter="
           (query, item) =>
             item.name.trim().toLowerCase().includes(query.trim().toLowerCase())
         "
-        :items="genres"
-        multiple
-        :selected="genres.filter((genre) => _.some(props.movie.genres, genre))"
-        @update:selected="
+          :items="genres"
+          multiple
+          :selected="genres.filter((genre) => _.some(props.movie.genres, genre))"
+          @update:selected="
           (e) =>
             updateAttribute(
               'genres',
@@ -61,10 +61,10 @@
         "
       />
       <RouterLink
-        :to="{
+          :to="{
           name: 'genres',
         }"
-        class="mt-auto"
+          class="mt-auto"
       >
         <IconButton :icon="ArrowRightIcon" />
       </RouterLink>
@@ -72,10 +72,10 @@
 
     <div class="flex space-x-4 mt-2">
       <ComboBox
-        label="Réalisateur"
-        displayed-attribute="getFullName"
-        class="flex-1"
-        :filter="
+          label="Réalisateur"
+          displayed-attribute="getFullName"
+          class="flex-1"
+          :filter="
           (query, item) =>
             item
               .getFullName()
@@ -83,18 +83,18 @@
               .toLowerCase()
               .includes(query.trim().toLowerCase())
         "
-        :items="directors"
-        required
-        :selected="
+          :items="directors"
+          required
+          :selected="
           props.movie.director ? directors.find((director) => director.id === props.movie.director.id) : undefined
         "
-        @update:selected="(e) => updateAttribute('director', e)"
+          @update:selected="(e) => updateAttribute('director', e)"
       >
         <template #option="{ item }">
           <div class="flex items-center space-x-2">
             <img
-              v-lazy="item.getPicture()"
-              class="w-8 h-8 object-cover rounded-full"
+                v-lazy="item.getPicture()"
+                class="w-8 h-8 object-cover rounded-full"
             />
             <div>
               {{ item.getFullName() }}
@@ -103,41 +103,28 @@
         </template>
       </ComboBox>
       <RouterLink
-        :to="{
+          :to="{
           name: 'directorDetails',
           params: { id: props.movie.director.id },
         }"
-        class="mt-auto"
-        v-if="props.movie.director"
+          class="mt-auto"
+          v-if="props.movie.director"
       >
         <IconButton :icon="ArrowRightIcon" />
       </RouterLink>
     </div>
     <TextInput
-      class="mt-2"
-      label="Date de sortie"
-      type="date"
-      :model-value="props.movie.releaseDate"
-      @update:model-value="(e) => updateAttribute('releaseDate', e)"
-      required
+        class="mt-2"
+        label="Date de sortie"
+        type="date"
+        :model-value="props.movie.releaseDate"
+        @update:model-value="(e) => updateAttribute('releaseDate', e)"
+        required
     />
-    <div class="flex mt-6 space-x-6">
-      <Button
-        text="Sauvegarder"
-        class="w-full"
-        @click="emits('save')"
-        :disabled="!hasChanged || !props.isValid"
-      />
-      <Button
-          v-if="movie.id"
-          text="Annuler les changements"
-          class="w-full"
-          @click="emits('cancel')"
-          theme="error"
-          :disabled="!hasChanged"
-      />
-    </div>
-  </div>
+    <template #buttons="{canCancel, canSave}">
+      <slot name="buttons" :canCancel="canCancel" :canSave="canSave"></slot>
+    </template>
+  </BaseForm>
 </template>
 
 <script setup lang="ts">
@@ -153,6 +140,7 @@ import { Api } from "@/services/api/Api";
 import _ from "lodash";
 import IconButton from "@/components/generic/IconButton.vue";
 import { ArrowRightIcon } from "@heroicons/vue/20/solid";
+import BaseForm from "@/components/forms/BaseForm.vue";
 
 const props = defineProps<{
   movie: Movie;

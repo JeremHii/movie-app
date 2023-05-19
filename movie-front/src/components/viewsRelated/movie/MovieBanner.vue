@@ -37,7 +37,11 @@
         </div>
         <div class="font-thin">
           {{ DateUtils.formatDate(props.movie.releaseDate) }} -
-          {{ props.movie.genres.map((genre) => genre.name).join(", ") }}
+          <RouterLink :to="{name: 'genreDetails', params: {id: genre.id}}" v-for="(genre, idx) in props.movie.genres" :key="genre.id">
+            <span class="inline hover:underline">
+            {{ genre.name }}{{ idx === props.movie.genres.length-1 ? "" : ", " }}
+          </span>
+          </RouterLink>
         </div>
         <div class="mt-2">
           <div class="text-xl font-semibold">Synopsis</div>
