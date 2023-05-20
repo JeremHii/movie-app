@@ -1,5 +1,11 @@
 <template>
-  <DirectorCreateEdit v-if="director" v-model:director="director" :saved-director="savedDirector" :is-new="false" @save="save"/>
+  <DirectorCreateEdit
+    v-if="director"
+    v-model:director="director"
+    :saved-director="savedDirector"
+    :is-new="false"
+    @save="save"
+  />
 </template>
 
 <script setup lang="ts">
@@ -18,9 +24,9 @@ const savedDirector = ref<Director | null>(null);
 const toast = useToast();
 
 onBeforeMount(async () => {
-  if (!route.params.id) return;
-  director.value = await Api.Director.getOne(route.params.id);
-  savedDirector.value = _.clone(director.value, { deep: true });
+  if (!route.params.id || typeof route.params.id !== "string") return;
+  director.value = await Api.Director.getOne(parseInt(route.params.id));
+  savedDirector.value = _.cloneDeep(director.value);
   if (director.value === null) {
     await router.push({ name: "directors" });
     return;
@@ -28,6 +34,7 @@ onBeforeMount(async () => {
 });
 
 const save = async () => {
+  if (!director.value || !director.value.id) return;
   const res = await Api.Director.update(director.value.id, director.value);
   if (res) {
     director.value = res;

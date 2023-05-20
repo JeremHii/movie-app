@@ -1,5 +1,5 @@
 <template>
-  <MovieCreateEdit v-model:movie="movie" :is-new="true" @save="save"/>
+  <MovieCreateEdit v-model:movie="movie" :is-new="true" @save="save" />
 </template>
 
 <script setup lang="ts">
@@ -11,7 +11,9 @@ import { useToast } from "vue-toastification";
 import MovieCreateEdit from "@/components/viewsRelated/movie/MovieCreateEdit.vue";
 
 const router = useRouter();
-const movie = ref<Movie>(new Movie({title: "", lang: "en", releaseDate: new Date()}));
+const movie = ref<Movie>(
+  new Movie({ title: "", lang: "en", releaseDate: new Date() })
+);
 const toast = useToast();
 
 const save = async () => {
@@ -19,7 +21,7 @@ const save = async () => {
   if (res) {
     movie.value = res;
     toast.success("Le film a été créé.");
-    await router.push({name: 'movieDetails', params: {id: movie.value.id}})
+    await router.push({ name: "movieDetails", params: { id: movie.value.id } });
   }
 };
 </script>

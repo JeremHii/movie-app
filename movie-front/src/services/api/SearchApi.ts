@@ -19,4 +19,31 @@ export class SearchApi {
     );
     return { movies, directors, genres };
   }
+
+  static async searchPoster(query: string): Promise<string[]> {
+    const response = await Api.instance.get("/search/poster", {
+      params: { query },
+    });
+
+    if (!response) return [];
+    return response.data;
+  }
+
+  static async searchBackground(query: string): Promise<string[]> {
+    const response = await Api.instance.get("/search/background", {
+      params: { query },
+    });
+
+    if (!response) return [];
+    return response.data;
+  }
+
+  static async searchPersonPicture(query: string): Promise<string[]> {
+    const response = await Api.instance.get("/search/person-picture", {
+      params: { query },
+    });
+
+    if (!response) return [];
+    return response.data;
+  }
 }

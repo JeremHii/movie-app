@@ -1,5 +1,11 @@
 <template>
-  <MovieCreateEdit v-if="movie" v-model:movie="movie" :saved-movie="savedMovie" :is-new="false" @save="save"/>
+  <MovieCreateEdit
+    v-if="movie"
+    v-model:movie="movie"
+    :saved-movie="savedMovie"
+    :is-new="false"
+    @save="save"
+  />
 </template>
 
 <script setup lang="ts">
@@ -19,9 +25,9 @@ const savedMovie = ref<Movie | null>(null);
 const toast = useToast();
 
 onBeforeMount(async () => {
-  if (!route.params.id) return;
-  movie.value = await Api.Movie.getOne(route.params.id);
-  savedMovie.value = _.clone(movie.value, { deep: true });
+  if (!route.params.id || typeof route.params.id !== "string") return;
+  movie.value = await Api.Movie.getOne(parseInt(route.params.id));
+  savedMovie.value = _.cloneDeep(movie.value);
   if (movie.value === null) {
     await router.push({ name: "home" });
     return;
@@ -29,6 +35,7 @@ onBeforeMount(async () => {
 });
 
 const save = async () => {
+  if (!movie.value || !movie.value.id) return;
   const res = await MovieApi.update(movie.value.id, movie.value);
   if (res) {
     movie.value = res;

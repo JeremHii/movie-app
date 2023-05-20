@@ -3,20 +3,27 @@ const {tmdbInstance} = require("./instance");
 class TmdbAPI {
     static lang = "fr-FR"
     static async getMovie(id) {
-        return (await tmdbInstance.get(`/movie/${id}?language=${TmdbAPI.lang}`)).data
+        return (await tmdbInstance.get(`/movie/${id}`, {params: {language: TmdbAPI.lang}})).data
     }
 
     static async getMovieCredits(id) {
-        return (await tmdbInstance.get(`/movie/${id}/credits?language=${TmdbAPI.lang}`)).data
+        return (await tmdbInstance.get(`/movie/${id}/credits`, {params: {language: TmdbAPI.lang}})).data
     }
 
     static async getPopularMovies(page) {
-        const res =  (await tmdbInstance.get(`/movie/popular?page=${page}&language=${TmdbAPI.lang}`)).data.results
-        return res
+        return (await tmdbInstance.get(`/movie/popular`, {params: {page, language: TmdbAPI.lang}})).data.results
     }
 
     static async getGenres() {
-        return (await tmdbInstance.get(`/genre/movie/list?language=${TmdbAPI.lang}`)).data.genres
+        return (await tmdbInstance.get(`/genre/movie/list`, {params: {language: TmdbAPI.lang}})).data.genres
+    }
+
+    static async searchMovies(query) {
+        return (await tmdbInstance.get(`/search/movie`, {params: {query, language: TmdbAPI.lang}})).data.results
+    }
+
+    static async searchPersons(query) {
+        return (await tmdbInstance.get(`/search/person`, {params: {query, language: TmdbAPI.lang}})).data.results
     }
 
     static async getMovieDirector(id) {
