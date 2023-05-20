@@ -10,7 +10,6 @@ import DirectorCreateView from "@/views/director/DirectorCreateView.vue";
 import GenresView from "@/views/genre/GenresView.vue";
 import GenreView from "@/views/genre/GenreView.vue";
 
-
 const router = createRouter({
   //@ts-ignore
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,7 +28,7 @@ const router = createRouter({
             {
               path: "new",
               name: "movieNew",
-              component: MovieCreateView
+              component: MovieCreateView,
             },
             {
               path: ":id",
@@ -45,8 +44,8 @@ const router = createRouter({
                   component: MovieEditView,
                 },
               ],
-            }
-          ]
+            },
+          ],
         },
         {
           path: "director",

@@ -1,9 +1,9 @@
 <template>
   <TextInput
-    :model-value="modelValue"
+    :model-value="props.modelValue"
     @update:model-value="(e) => emits('update:modelValue', e)"
     :icon="MagnifyingGlassIcon"
-    :place-holder="placeHolder"
+    :place-holder="props.placeHolder"
   />
 </template>
 

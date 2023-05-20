@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import Button from "@/components/generic/Button.vue";
+import Button from "@/components/generic/CustomButton.vue";
 import Label from "@/components/generic/form/Label.vue";
 import Banner from "@/components/generic/Banner.vue";
 import { ref } from "vue";

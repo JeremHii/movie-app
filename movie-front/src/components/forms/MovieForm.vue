@@ -126,6 +126,7 @@
             <img
               v-lazy="item.getPicture()"
               class="w-8 h-8 object-cover rounded-full"
+              alt="Director"
             />
             <div>
               {{ item.getFullName() }}
@@ -179,7 +180,6 @@ import TextInput from "@/components/generic/form/TextInput.vue";
 import { onBeforeMount, ref, watch } from "vue";
 import TextAreaInput from "@/components/generic/form/TextAreaInput.vue";
 import ComboBox from "@/components/generic/form/ComboBox.vue";
-import Button from "@/components/generic/button.vue";
 import { Genre } from "@/models/Genre";
 import { Director } from "@/models/Director";
 import { Api } from "@/services/api/Api";
@@ -187,7 +187,6 @@ import _ from "lodash";
 import IconButton from "@/components/generic/IconButton.vue";
 import { ArrowRightIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
 import BaseForm from "@/components/forms/BaseForm.vue";
-import BaseModal from "@/components/modals/BaseModal.vue";
 import { SearchApi } from "@/services/api/SearchApi";
 import { useToast } from "vue-toastification";
 import ImagePickerModal from "@/components/modals/ImagePickerModal.vue";
@@ -217,7 +216,8 @@ onBeforeMount(async () => {
 });
 
 const updateAttribute = (attribute: string, value: any) => {
-  const newMovie: Movie = _.clone(props.movie);
+  const newMovie: Movie = _.cloneDeep(props.movie);
+  //@ts-ignore
   newMovie[attribute] = value;
   emits("update:movie", newMovie);
 };

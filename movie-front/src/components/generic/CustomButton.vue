@@ -22,7 +22,7 @@ const props = withDefaults(
   defineProps<{
     text: string;
     disabled?: boolean;
-    icon?: any
+    icon?: any;
     theme?: ButtonTheme;
   }>(),
   { theme: "normal" }

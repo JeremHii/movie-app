@@ -2,7 +2,7 @@
   <div class="flex flex-wrap">
     <MovieCard
       class="m-1"
-      v-for="movie in movies"
+      v-for="movie in props.movies"
       :key="movie.id"
       :movie="movie"
     />

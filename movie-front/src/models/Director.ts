@@ -8,7 +8,7 @@ export class Director {
   birthDate: Date;
   picture?: string;
   biography?: string;
-  movies?: Movie[];
+  movies: Movie[];
 
   constructor(data: Partial<Director>) {
     this.id = data.id;

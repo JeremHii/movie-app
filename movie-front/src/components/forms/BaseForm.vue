@@ -1,22 +1,28 @@
 <template>
   <div>
-    <slot/>
+    <slot />
 
     <div class="flex mt-6 space-x-6">
-      <slot name="buttons" :canSave="hasChanged && props.isValid" :canCancel="hasChanged" @cancel="emits('cancel')" @save="emits('save')">
+      <slot
+        name="buttons"
+        :canSave="hasChanged && props.isValid"
+        :canCancel="hasChanged"
+        @cancel="emits('cancel')"
+        @save="emits('save')"
+      >
         <Button
-            text="Sauvegarder"
-            class="w-full"
-            @click="emits('save')"
-            :disabled="!hasChanged || !props.isValid"
+          text="Sauvegarder"
+          class="w-full"
+          @click="emits('save')"
+          :disabled="!hasChanged || !props.isValid"
         />
         <Button
-            v-if="entity.id"
-            text="Annuler les changements"
-            class="w-full"
-            @click="emits('cancel')"
-            theme="error"
-            :disabled="!hasChanged"
+          v-if="entity.id"
+          text="Annuler les changements"
+          class="w-full"
+          @click="emits('cancel')"
+          theme="error"
+          :disabled="!hasChanged"
         />
       </slot>
     </div>
@@ -24,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import Button from "@/components/generic/Button.vue";
+import Button from "@/components/generic/CustomButton.vue";
 
 const props = defineProps<{
   entity: any;

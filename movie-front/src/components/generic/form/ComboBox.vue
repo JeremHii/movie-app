@@ -104,8 +104,6 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/vue/20/solid";
-import Label from "@/components/generic/form/Label.vue";
-import TextInput from "@/components/generic/form/TextInput.vue";
 import BaseInput from "@/components/generic/form/BaseInput.vue";
 
 const props = withDefaults(
@@ -139,7 +137,7 @@ let filteredItems = computed(() => {
     : props.items.filter((item) => props.filter(realQuery, item));
 });
 
-const getDisplayedAttribute = (item) => {
+const getDisplayedAttribute = (item: any) => {
   if (typeof item[props.displayedAttribute] === "function") {
     return item[props.displayedAttribute]();
   }

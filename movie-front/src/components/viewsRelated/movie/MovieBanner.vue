@@ -12,6 +12,7 @@
           crossorigin=""
           ref="img"
           class="object-cover w-full h-full"
+          alt="Movie background"
         />
         <div
           class="absolute top-0 w-full h-full"
@@ -25,6 +26,7 @@
       <img
         :src="props.movie.getPoster()"
         class="rounded-lg max-h-72 xs:max-h-80 sm:max-h-[35rem] md:max-h-full w-48 sm:w-80 md:w-96 lg:w-[35rem] object-cover z-50"
+        alt="Movie poster"
       />
       <div class="ml-10 my-auto overflow-x-hidden z-50 p-2">
         <div>
@@ -37,10 +39,15 @@
         </div>
         <div class="font-thin">
           {{ DateUtils.formatDate(props.movie.releaseDate) }} -
-          <RouterLink :to="{name: 'genreDetails', params: {id: genre.id}}" v-for="(genre, idx) in props.movie.genres" :key="genre.id">
+          <RouterLink
+            :to="{ name: 'genreDetails', params: { id: genre.id } }"
+            v-for="(genre, idx) in props.movie.genres"
+            :key="genre.id"
+          >
             <span class="inline hover:underline">
-            {{ genre.name }}{{ idx === props.movie.genres.length-1 ? "" : ", " }}
-          </span>
+              {{ genre.name
+              }}{{ idx === props.movie.genres.length - 1 ? "" : ", " }}
+            </span>
           </RouterLink>
         </div>
         <div class="mt-2">
@@ -51,8 +58,8 @@
         </div>
         <div class="mt-2">
           <RouterLink
-            v-if="movie.id"
-            :to="{ name: 'movieEdit', params: { id: movie.id } }"
+            v-if="props.movie.id"
+            :to="{ name: 'movieEdit', params: { id: props.movie.id } }"
           >
             <IconButton
               :icon="PencilIcon"
@@ -64,7 +71,12 @@
               ></div>
             </IconButton>
           </RouterLink>
-          <IconButton :icon="TrashIcon" theme="error" class="ml-2" @click="emits('delete')" />
+          <IconButton
+            :icon="TrashIcon"
+            theme="error"
+            class="ml-2"
+            @click="emits('delete')"
+          />
         </div>
       </div>
     </div>
@@ -82,7 +94,7 @@ import { DateUtils } from "@/utils/DateUtils";
 const dominantColor = ref<string>("transparent");
 
 const props = defineProps<{ movie: Movie }>();
-const emits = defineEmits<{ (e: "delete"): void }>()
+const emits = defineEmits<{ (e: "delete"): void }>();
 const img = ref();
 
 watch(props, async () => {

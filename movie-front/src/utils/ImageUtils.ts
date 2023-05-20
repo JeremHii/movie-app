@@ -6,9 +6,11 @@ export class ImageUtils {
       try {
         const colorThief = new ColorThief();
         if (img.complete) {
+          //@ts-ignore
           resolve(ImageUtils.rgbToHex(...colorThief.getColor(img)));
         } else {
           img.addEventListener("load", () => {
+            //@ts-ignore
             resolve(ImageUtils.rgbToHex(...colorThief.getColor(img)));
           });
         }

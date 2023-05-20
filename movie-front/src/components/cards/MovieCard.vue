@@ -12,6 +12,7 @@
       <img
         class="w-full h-full rounded-lg object-cover"
         v-lazy="props.movie.getPoster()"
+        alt="Movie poster"
       />
       <div
         class="absolute w-full h-full top-0 rounded-lg bg-gradient-to-b from-transparent group-hover:from-black/40 to-black group-hover:to-black transition-all"
@@ -30,6 +31,7 @@
               v-if="props.movie.director"
               :src="props.movie.director.getPicture()"
               class="mr-2 h-8 w-8 rounded-full object-cover"
+              alt="Director picture"
             />
             <div class="text-amber-400 truncate">
               {{

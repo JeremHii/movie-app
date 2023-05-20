@@ -109,7 +109,8 @@ const picturesFound = ref<string[]>([]);
 const toast = useToast();
 
 const updateAttribute = (attribute: string, value: any) => {
-  const newDirector: Director = _.clone(props.director);
+  const newDirector: Director = _.cloneDeep(props.director);
+  //@ts-ignore
   newDirector[attribute] = value;
   emits("update:director", newDirector);
 };

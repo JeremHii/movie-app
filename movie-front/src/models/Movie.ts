@@ -46,9 +46,7 @@ export class Movie {
   }
 
   getTitle() {
-    return this.title && this.title.trim() !== ""
-        ? this.title
-        : "Aucun titre";
+    return this.title && this.title.trim() !== "" ? this.title : "Aucun titre";
   }
 
   getLanguageName() {

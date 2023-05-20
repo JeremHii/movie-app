@@ -3,5 +3,5 @@ import { EntityApi } from "@/services/api/EntityApi";
 
 export class GenreApi extends EntityApi {
   static model = Genre;
-  static path = "/genres"
+  static path = "/genres";
 }

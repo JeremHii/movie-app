@@ -12,6 +12,7 @@
       <img
         class="w-full h-full rounded-lg object-cover"
         v-lazy="props.director.getPicture()"
+        alt="Director picture"
       />
 
       <div

@@ -59,14 +59,14 @@ const emits = defineEmits<{
   (e: "update:modelValue", value: string | Date): void;
 }>();
 
-const onInput = (e) => {
+const onInput = (e: any) => {
   emits(
     "update:modelValue",
     props.type === "date" ? new Date(e.target.value) : e.target.value
   );
 };
 
-const onChange = (e) => {
+const onChange = () => {
   if (props.required) showError.value = true;
 };
 </script>

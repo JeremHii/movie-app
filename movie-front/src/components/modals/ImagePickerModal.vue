@@ -13,6 +13,7 @@
         class="object-cover m-2 cursor-pointer"
         :class="props.imgClasses"
         @click="emits('selectImage', img)"
+        alt="Image"
       />
     </div>
     <div class="mt-2 dark:text-white" v-else>
@@ -31,7 +32,7 @@
 
 <script setup lang="ts">
 import BaseModal from "@/components/modals/BaseModal.vue";
-import Button from "@/components/generic/Button.vue";
+import Button from "@/components/generic/CustomButton.vue";
 
 const props = withDefaults(
   defineProps<{

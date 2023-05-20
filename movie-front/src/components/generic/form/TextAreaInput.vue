@@ -38,11 +38,11 @@ const emits = defineEmits<{
   (e: "update:modelValue", value: string): void;
 }>();
 
-const onInput = (e) => {
+const onInput = (e: any) => {
   emits("update:modelValue", e.target.value);
 };
 
-const onChange = (e) => {
+const onChange = () => {
   if (props.required) showError.value = true;
 };
 </script>

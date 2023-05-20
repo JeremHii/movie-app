@@ -12,6 +12,7 @@
         crossorigin=""
         ref="img"
         class="rounded-lg max-h-72 xs:max-h-80 sm:max-h-[35rem] md:max-h-full w-48 md:w-64 lg:w-[20rem] object-cover z-50"
+        alt="Director picture"
       />
       <div class="ml-10 my-auto overflow-x-hidden z-50 p-2">
         <div>
@@ -49,7 +50,12 @@
               ></div>
             </IconButton>
           </RouterLink>
-          <IconButton :icon="TrashIcon" theme="error" class="ml-2" @click="emits('delete')" />
+          <IconButton
+            :icon="TrashIcon"
+            theme="error"
+            class="ml-2"
+            @click="emits('delete')"
+          />
         </div>
       </div>
     </div>
@@ -62,10 +68,10 @@ import { PencilIcon, TrashIcon } from "@heroicons/vue/24/solid";
 import { computed, ref, watch } from "vue";
 import { ImageUtils } from "@/utils/ImageUtils";
 import IconButton from "@/components/generic/IconButton.vue";
-import {DateUtils} from "@/utils/DateUtils";
+import { DateUtils } from "@/utils/DateUtils";
 
 const props = defineProps<{ director: Director }>();
-const emits = defineEmits<{ (e: "delete"): void }>()
+const emits = defineEmits<{ (e: "delete"): void }>();
 const dominantColor = ref<string>("transparent");
 const img = ref();
 

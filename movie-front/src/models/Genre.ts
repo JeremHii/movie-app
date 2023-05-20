@@ -1,9 +1,9 @@
-import {Movie} from "@/models/Movie";
+import { Movie } from "@/models/Movie";
 
 export class Genre {
   id?: number;
   name: string;
-  movies?: Movie[];
+  movies: Movie[];
 
   static findById(genres: Genre[], id: number) {
     return genres.find((genre) => genre.id === id);
@@ -13,10 +13,8 @@ export class Genre {
     this.id = data.id;
     this.name = data.name || "";
     this.movies = data.movies
-        ? data.movies.map(
-            (movieData) => new Movie({ ...movieData })
-        )
-        : [];
+      ? data.movies.map((movieData) => new Movie({ ...movieData }))
+      : [];
   }
 
   getPayload() {

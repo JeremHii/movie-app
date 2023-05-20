@@ -8,6 +8,7 @@
         <img
           :src="props.director.getPicture()"
           class="w-full max-h-72 object-cover rounded-lg"
+          alt="Director picture"
         />
       </div>
     </RouterLink>
