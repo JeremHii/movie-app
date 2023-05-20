@@ -18,3 +18,6 @@
 
 > Les films sont récupérés auprès de l'API [TMDB](https://developer.themoviedb.org/docs).
 > Ce sont les films les plus populaires en ce moment. [Voir cet endpoint pour plus de détails.](https://developer.themoviedb.org/reference/movie-popular-list)
+
+> Si la procédure ne fonctionne pas, vous pouvez toujours renommer le fichier `example.database.sqlite3` en `database.sqlite3` dans [Movie - API](movie-api/).
+> Cette base de données contient 300 films.
