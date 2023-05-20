@@ -21,6 +21,8 @@ class DatabaseController {
             return
         }
 
+        console.log("Fetching genres")
+
         let genres = await TmdbAPI.getGenres()
 
         console.log(`Fetched ${genres.length} genres`)
@@ -38,6 +40,8 @@ class DatabaseController {
         console.log(`Fetched ${movies.length} movies`)
 
         let directors = []
+
+        console.log("Fetching directors")
 
         let i = 0;
         for(let movie of movies){
@@ -64,6 +68,8 @@ class DatabaseController {
                 biography: director.biography
             })).id
         }
+
+        console.log(`Saving ${movies.length} movies in database`)
 
         for(let movie of movies){
             const movieDirector = directors.find((director) => director.id === movie.directorId)
